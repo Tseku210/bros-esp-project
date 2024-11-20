@@ -1,24 +1,31 @@
-import logo from './logo.svg';
-import './App.css';
+import Project from "./components/project";
+import { ShootingStars } from "./components/shooting-stars";
+import { StarsBackground } from "./components/stars-background";
+import MainProvider from "./state/MainProvider";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <MainProvider>
+      <div className="min-h-screen bg-neutral-900 flex flex-col items-center justify-center relative w-full">
+        <img
+          src="pusan-logo.png"
+          alt="pusan logo"
+          className="absolute top-10 right-10 h-40"
+        />
+        <Project />
+        <ShootingStars />
+        <StarsBackground />
+        <div className="absolute flex flex-col bottom-10 right-10">
+          <span className="italic">
+            Powered by &nbsp;
+            <span className="font-bold text-red-300">Garid Mandakhbayar</span>
+          </span>
+          <span className="text-white/30 text-sm text-center">
+            Capstone Project
+          </span>
+        </div>
+      </div>
+    </MainProvider>
   );
 }
 
