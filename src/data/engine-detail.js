@@ -6,7 +6,7 @@ export const ESPDetails = {
       "https://ntrs.nasa.gov/api/citations/19940019157/downloads/19940019157.pdf",
       "https://electricrocket.org/IEPC/IEPC-2011-329.pdf",
     ],
-    image: "engines/sp100.jpeg",
+    image: "engines/spt100.jpeg",
   },
   "ROS 2000": {
     background:
