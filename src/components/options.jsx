@@ -18,7 +18,7 @@ const Options = ({ next }) => {
       {Array.from(types).map((type) => (
         <div key={type} tabIndex={0} className="collapse">
           <input type="checkbox" />
-          <div className="collapse-title font-bold pe-0 flex justify-center text-5xl">
+          <div className="collapse-title font-bold pe-0 flex justify-center text-md md:text-3xl xl:text-5xl">
             <span className="text-center">{type}</span>
           </div>
           <div className="collapse-content text-white flex flex-col gap-2">

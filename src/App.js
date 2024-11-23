@@ -10,7 +10,7 @@ function App() {
         <img
           src="pusan-logo.png"
           alt="pusan logo"
-          className="absolute top-10 right-10 h-40"
+          className="absolute top-10 right-10 h-28"
         />
         <Project />
         <ShootingStars />

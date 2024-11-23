@@ -65,23 +65,31 @@ const Details = ({ next, back }) => {
             alt="zurag"
             className="w-full max-h-64 object-contain mb-4"
           />
-          <p className="mb-4 text-lg font-thin text-white/50">
+          <p className="mb-4 text-lg font-thin text-white">
             {moreDetail.background}
           </p>
           <h3 className="text-xl font-semibold">References:</h3>
           <ul className="list-disc pl-5">
-            {moreDetail.references.map((ref, index) => (
-              <li key={index}>
-                <a
-                  href={ref}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-blue-300 underline"
-                >
-                  {ref}
-                </a>
-              </li>
-            ))}
+            <li>
+              <a
+                href={moreDetail.references[0]}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-blue-300 underline"
+              >
+                Background info
+              </a>
+            </li>
+            <li>
+              <a
+                href={moreDetail.references[1]}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-blue-300 underline"
+              >
+                Chart
+              </a>
+            </li>
           </ul>
         </div>
       )}
