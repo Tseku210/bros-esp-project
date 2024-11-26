@@ -1,14 +1,17 @@
 import { useContext, useState } from "react";
-import { EPSystems } from "../data/engines";
-import { MainContext } from "../state/MainProvider";
+import { EPSystems } from "../../data/engines";
+import { MainContext } from "../../state/MainProvider";
+import MissionResult from "./mission-result";
 
-const OptionsToCompare = ({ next, back }) => {
-  const { setSelectedOptionToCompare } = useContext(MainContext);
+const ThrusterOptions = () => {
+  const { addStep, goBack, setSelectedThruster, ranking } =
+    useContext(MainContext);
   const [types] = useState(() => new Set(EPSystems.map((el) => el.type)));
+  const usedThrusters = new Set(ranking.map((item) => item.name));
 
-  const handleOptionClick = (type) => {
-    setSelectedOptionToCompare(type);
-    next();
+  const handleOptionClick = (thruster) => {
+    setSelectedThruster(thruster);
+    addStep(<MissionResult />);
   };
 
   return (
@@ -24,9 +27,11 @@ const OptionsToCompare = ({ next, back }) => {
               <span className="text-center">{type}</span>
             </div>
             <div className="collapse-content text-white flex flex-col gap-2">
-              {EPSystems.filter((el) => el.type === type).map((item) => (
+              {EPSystems.filter(
+                (el) => el.type === type && !usedThrusters.has(el.name),
+              ).map((item) => (
                 <button
-                  onClick={() => handleOptionClick(item.name)}
+                  onClick={() => handleOptionClick(item)}
                   key={item.name}
                   className="btn btn-outline"
                 >
@@ -38,7 +43,7 @@ const OptionsToCompare = ({ next, back }) => {
         ))}
       </div>
       <button
-        onClick={back}
+        onClick={goBack}
         className="btn btn-outline absolute left-10 top-2/4"
       >
         Go back
@@ -47,4 +52,4 @@ const OptionsToCompare = ({ next, back }) => {
   );
 };
 
-export default OptionsToCompare;
+export default ThrusterOptions;

@@ -3,7 +3,7 @@ clear all;
 close all;
 
 % Constants
-g0 = 9.81; % Gravitational acceleration (m/s^2)
+g0 = 9.80665; % Gravitational acceleration (m/s^2)
 
 % Define spacecraft database (Currently only Dawn)
 spacecraftDatabase = {
@@ -12,7 +12,7 @@ spacecraftDatabase = {
 
 % Define planet database (Currently only Mars)
 planetDatabase = {
-    'Mars', 54.6e6 * 1000; % Name, Distance from Earth in meters
+    'Mars', 77248512 * 1000; % Name, Distance from Mars is in an orbit about miles of our orbit in meters
 };
 
 % Define the Electric Propulsion Systems database
@@ -26,16 +26,8 @@ EPSystems = {
     'T6', 'Ion Thruster', 35, 150, 4400, 20;
     'DS4G', 'Ion Thruster', [70 90], [2 5], 14000, NaN; % Estimated
     'PPS 1350', 'Hall Thruster', 17, [50 88], 1650, 3;
-    'SPT100', 'Hall Thruster', 17, 83, 1600, 2.9;
-    'ROS 2000', 'Hall Thruster', 19, [71 132], [1600 1700], 2.9;
-    'HT100', 'Hall Thruster', 20, [2 12], [900 1600], 0.05;
-    'HT400', 'Hall Thruster', 20, [19 25], [1000 1450], 0.2;
-    'XHT 5000', 'Hall Thruster', 22, 230, NaN, NaN; % Estimated
-    'HEMPT 3050', 'Hall Thruster', [20 35], [10 70], [2000 3500], 4;
-    'HEMPT 30250', 'Hall Thruster', [20 35], [30 330], [2000 3500], 20;
-    'PPS 5000', 'Hall Thruster', [15 20], [230 325], [2300 1750], 15;
-    'CHEAP', 'Hall Thruster', 17, 15, 1400, 0.2;
     'PPSNG', 'Hall Thruster', 18, 140, 1900, 5;
+    'PPS 5000', 'Hall Thruster', [15 20], [230 325], [2300 1750], 15;
 };
 
 % Ask the user to choose a spacecraft
@@ -96,7 +88,6 @@ end
 thruster = EPSystems(thrusterChoice, :);
 thrusterName = thruster{1};
 thrusterType = thruster{2};
-powerToThrust = mean(thruster{3}, 'omitnan'); % Handle missing values
 thrust = mean(thruster{4}, 'omitnan') / 1000; % Convert mN to N
 ISP = mean(thruster{5}, 'omitnan'); % Specific impulse (s)
 
@@ -109,34 +100,25 @@ fprintf('You selected: %s (%s)\n', thrusterName, thrusterType);
 % Calculate exhaust velocity (m/s)
 exhaustVelocity = ISP * g0;
 
-% Assume a desired travel time to the planet (200 days)
-idealTimeDays = 200; % Example travel time in days
-idealTimeSeconds = idealTimeDays * 24 * 3600; % Convert days to seconds
-requiredDeltaV = distanceToPlanet / idealTimeSeconds; % Required delta-v (m/s)
+% Calculate delta-v using Tsiolkovsky rocket equation
+deltaV = exhaustVelocity * log(launchMass / dryMass);
 
-% Calculate final mass after burning propellant using Tsiolkovsky rocket equation
-m0 = launchMass; % Initial mass
-mf = m0 / exp(requiredDeltaV / exhaustVelocity); % Final mass
-propellantConsumed = m0 - mf;
+% Calculate thrust duration directly
+propellantConsumed = launchMass - dryMass; % Total propellant consumed
+thrustDuration = propellantConsumed / (thrust / exhaustVelocity); % Burn time (s)
+thrustDurationDays = thrustDuration / (24 * 3600); % Convert to days
 
-% Check if propellant is sufficient
-if propellantConsumed > propellantMass
-    fprintf(' - Insufficient propellant for %s.\n', thrusterName);
-else
-    % Calculate thrust time to achieve delta-v
-    avgMass = (m0 + mf) / 2; % Average mass during thrust
-    thrustTime = (requiredDeltaV * avgMass) / thrust; % Time to achieve delta-v (s)
-    thrustTimeDays = thrustTime / (24 * 3600); % Convert to days
+% Calculate coasting time
+coastingTime = distanceToPlanet / deltaV; % Time in seconds
+coastingTimeDays = coastingTime / (24 * 3600); % Convert to days
 
-    % Total travel time (ideal + thrust duration)
-    totalTimeDays = idealTimeDays + thrustTimeDays;
+% Total travel time
+totalTravelTimeDays = thrustDurationDays + coastingTimeDays;
 
-    % Calculate power required
-    powerRequired = thrust * powerToThrust * 1000; % Power in watts
-
-    % Display results
-    fprintf('\nMission Summary:\n');
-    fprintf(' - Propellant Consumed: %.2f kg\n', propellantConsumed);
-    fprintf(' - Total Travel Time: %.2f days\n', totalTimeDays);
-    fprintf(' - Power Required: %.2f W\n', powerRequired);
-end
+% Display results
+fprintf('\nMission Summary:\n');
+fprintf(' - Delta-V: %.2f m/s\n', deltaV);
+fprintf(' - Propellant Consumed: %.2f kg\n', propellantConsumed);
+fprintf(' - Thrust Duration (Burn Time): %.2f days\n', thrustDurationDays);
+fprintf(' - Coasting Time: %.2f days\n', coastingTimeDays);
+fprintf(' - Total Travel Time: %.2f days\n', totalTravelTimeDays);

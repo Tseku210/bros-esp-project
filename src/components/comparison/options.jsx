@@ -1,16 +1,15 @@
-import { useContext, useState } from "react";
-import { EPSystems } from "../data/engines";
-import { MainContext } from "../state/MainProvider";
+import { useContext } from "react";
+import { EPSystems } from "../../data/engines";
+import { MainContext } from "../../state/MainProvider";
+import Details from "./details";
 
-const Options = ({ next }) => {
-  const { setSelectedOption } = useContext(MainContext);
-  const [types, setTypes] = useState(
-    () => new Set(EPSystems.map((el) => el.type)),
-  );
+const Options = () => {
+  const { addStep, goBack, setSelectedOption } = useContext(MainContext);
+  const types = new Set(EPSystems.map((el) => el.type));
 
   const handleOptionClick = (type) => {
     setSelectedOption(type);
-    next();
+    addStep(<Details />);
   };
 
   return (
@@ -34,6 +33,12 @@ const Options = ({ next }) => {
           </div>
         </div>
       ))}
+      <button
+        onClick={goBack}
+        className="btn btn-outline fixed left-10 top-2/4"
+      >
+        Go back
+      </button>
     </div>
   );
 };

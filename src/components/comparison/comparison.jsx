@@ -9,12 +9,13 @@ import {
   XAxis,
   YAxis,
 } from "recharts";
-import { EPSystems } from "../data/engines";
-import { compareSystems } from "../lib/compare";
-import { MainContext } from "../state/MainProvider";
+import { EPSystems } from "../../data/engines";
+import { compareSystems } from "../../lib/compare";
+import { MainContext } from "../../state/MainProvider";
 
-const Comparison = ({ next, back }) => {
-  const { selectedOption, selectedOptionToCompare } = useContext(MainContext);
+const Comparison = () => {
+  const { reset, goBack, selectedOption, selectedOptionToCompare } =
+    useContext(MainContext);
 
   const system1 = EPSystems.find((item) => item.name === selectedOption);
   const system2 = EPSystems.find(
@@ -25,7 +26,7 @@ const Comparison = ({ next, back }) => {
     return (
       <div>
         You didn't select two EPS to compare.{" "}
-        <button className="btn btn-link" onClick={back}>
+        <button className="btn btn-link" onClick={goBack}>
           go back
         </button>
       </div>
@@ -139,7 +140,7 @@ const Comparison = ({ next, back }) => {
       </div>
 
       {/* Comparison Graphs */}
-      <div className="mt-10">
+      <div className="mt-10 max-w-5xl mx-auto">
         <h2 className="text-center text-2xl mb-6">Comparison Graphs</h2>
         {result.map((res, index) => (
           <div key={index} className="mb-10">
@@ -169,7 +170,7 @@ const Comparison = ({ next, back }) => {
       </div>
 
       {/* Overall Winner */}
-      <div className="my-16 text-center">
+      <div className="my-20 text-center">
         {overallWinner ? (
           <>
             <h2 className="text-3xl text-green-300">Overall Winner</h2>
@@ -195,10 +196,16 @@ const Comparison = ({ next, back }) => {
         )}
       </div>
       {/* Navigation Buttons */}
-      <button onClick={back} className="btn btn-outline fixed left-10 top-2/4">
+      <button
+        onClick={goBack}
+        className="btn btn-outline fixed left-10 top-2/4"
+      >
         Go back
       </button>
-      <button onClick={next} className="btn btn-outline fixed right-10 top-2/4">
+      <button
+        onClick={reset}
+        className="btn btn-outline fixed right-10 top-2/4"
+      >
         Start new?
       </button>
     </div>

@@ -1,11 +1,12 @@
 import { useContext, useState } from "react";
-import { ESPDetails } from "../data/engine-detail";
-import { EPSystems } from "../data/engines";
-import { cn } from "../lib/utils";
-import { MainContext } from "../state/MainProvider";
+import { EPSystems } from "../../data/engines";
+import { ESPDetails } from "../../data/engine-detail";
+import OptionsToCompare from "./options-to-compare";
+import { cn } from "../../lib/utils";
+import { MainContext } from "../../state/MainProvider";
 
-const Details = ({ next, back }) => {
-  const { selectedOption } = useContext(MainContext);
+const Details = () => {
+  const { addStep, goBack, selectedOption } = useContext(MainContext);
   const [itemDetail] = useState(() =>
     EPSystems.find((item) => item.name === selectedOption),
   );
@@ -95,11 +96,14 @@ const Details = ({ next, back }) => {
       )}
 
       {/* Navigation Buttons */}
-      <button onClick={back} className="btn btn-outline fixed left-10 top-2/4">
+      <button
+        onClick={goBack}
+        className="btn btn-outline fixed left-10 top-2/4"
+      >
         Go back
       </button>
       <button
-        onClick={next}
+        onClick={() => addStep(<OptionsToCompare />)}
         className="btn btn-outline btn-warning fixed right-10 top-2/4"
       >
         Compare
