@@ -13,8 +13,8 @@ function App() {
           className="absolute top-10 right-10 h-28"
         />
         <Project />
-        {/* <ShootingStars /> */}
-        {/* <StarsBackground /> */}
+        <ShootingStars />
+        <StarsBackground />
         <div className="absolute flex flex-col bottom-10 right-10">
           <span className="italic">
             Powered by &nbsp;
