@@ -17,7 +17,7 @@ function App() {
         </main>
         <ShootingStars />
         <StarsBackground />
-        <div className="absolute flex flex-col bottom-10 right-10">
+        <div className="absolute flex flex-col bottom-10 mx-auto  md:right-10">
           <span className="italic">
             Powered by &nbsp;
             <span className="font-bold text-red-300">Garid Mandakhbayar</span>
