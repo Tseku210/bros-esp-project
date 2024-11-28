@@ -10,9 +10,11 @@ function App() {
         <img
           src="pusan-logo.png"
           alt="pusan logo"
-          className="absolute top-10 right-10 h-28"
+          className="absolute top-10 right-10 h-20 md:h-28"
         />
-        <Project />
+        <main className="my-28">
+          <Project />
+        </main>
         <ShootingStars />
         <StarsBackground />
         <div className="absolute flex flex-col bottom-10 right-10">

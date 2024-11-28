@@ -7,7 +7,7 @@ const Project = () => {
   return (
     <div
       tabIndex={0}
-      className="collapse z-10 flex items-center justify-center overflow-visible"
+      className="collapse z-10 flex items-center justify-center overflow-visible px-3"
     >
       {steps[steps.length - 1]}
     </div>

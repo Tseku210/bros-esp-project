@@ -25,7 +25,7 @@ const Options = () => {
               <button
                 onClick={() => handleOptionClick(item.name)}
                 key={item.name}
-                className="btn btn-outline"
+                className="btn btn-outline btn-sm md:btn-md"
               >
                 {item.name}
               </button>
@@ -35,7 +35,7 @@ const Options = () => {
       ))}
       <button
         onClick={goBack}
-        className="btn btn-outline fixed left-10 top-2/4"
+        className="btn btn-outline w-full md:w-fit md:fixed left-10 top-2/4"
       >
         Go back
       </button>

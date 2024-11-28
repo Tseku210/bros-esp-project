@@ -54,11 +54,11 @@ const Comparison = () => {
   }
 
   return (
-    <div>
+    <div className="h-full">
       {/* System Details */}
-      <div className="flex items-center justify-center mt-96">
+      <div className="flex items-center flex-wrap md:flex-nowrap gap-20 md:gap-0 justify-center mt-32 md:mt-60">
         {system1 ? (
-          <div className="w-fit flex gap-5 text-3xl relative">
+          <div className="w-fit flex gap-5 text-lg md:text-3xl relative">
             <img
               src="ship-orange.svg"
               alt="ship orange"
@@ -84,7 +84,7 @@ const Comparison = () => {
           <div>Not found</div>
         )}
         {system2 ? (
-          <div className="w-fit flex gap-5 text-3xl relative">
+          <div className="w-fit flex gap-5 text-lg md:text-3xl relative">
             <img
               src="ship-red.svg"
               alt="ship red"
@@ -112,10 +112,10 @@ const Comparison = () => {
       </div>
 
       {/* Comparison Results */}
-      <h3 className="text-center text-white/20 mt-32 mb-5 text-xl underline">
+      <h3 className="text-center text-white/20 mt-32 mb-5 text-lg md:text-xl underline">
         Result
       </h3>
-      <div className="mx-auto w-fit grid grid-cols-2 gap-3 text-xl">
+      <div className="mx-auto w-fit grid grid-cols-2 gap-3 md:text-xl">
         {result.map((res, index) => (
           <div key={index}>
             <span className="capitalize font-light text-white/30">
@@ -141,10 +141,12 @@ const Comparison = () => {
 
       {/* Comparison Graphs */}
       <div className="mt-10 max-w-5xl mx-auto">
-        <h2 className="text-center text-2xl mb-6">Comparison Graphs</h2>
+        <h2 className="text-center text-lg md:text-2xl mb-6">
+          Comparison Graphs
+        </h2>
         {result.map((res, index) => (
           <div key={index} className="mb-10">
-            <h3 className="text-center text-xl mb-4">{res.metric}</h3>
+            <h3 className="text-center md:text-xl mb-4">{res.metric}</h3>
             <ResponsiveContainer width="100%" height={300}>
               <BarChart
                 data={[
@@ -173,8 +175,10 @@ const Comparison = () => {
       <div className="my-20 text-center">
         {overallWinner ? (
           <>
-            <h2 className="text-3xl text-green-300">Overall Winner</h2>
-            <p className="text-2xl mt-4 text-white">
+            <h2 className="text-lg md:text-3xl text-green-300">
+              Overall Winner
+            </h2>
+            <p className="md:text-2xl mt-4 text-white">
               {overallWinner.name} ({overallWinner.type})
             </p>
             <p className="text-lg mt-2 text-gray-400">
@@ -184,11 +188,11 @@ const Comparison = () => {
           </>
         ) : (
           <>
-            <h2 className="text-3xl text-yellow-300">It's a Tie!</h2>
-            <p className="text-2xl mt-4 text-white">
+            <h2 className="text-lg md:text-3xl text-yellow-300">It's a Tie!</h2>
+            <p className="md:text-2xl mt-4 text-white">
               Both {system1.name} and {system2.name} performed equally well.
             </p>
-            <p className="text-lg mt-2 text-gray-400">
+            <p className="md:text-lg mt-2 text-gray-400">
               Consider other metrics or mission-specific requirements to make a
               final decision.
             </p>
@@ -196,18 +200,20 @@ const Comparison = () => {
         )}
       </div>
       {/* Navigation Buttons */}
-      <button
-        onClick={goBack}
-        className="btn btn-outline fixed left-10 top-2/4"
-      >
-        Go back
-      </button>
-      <button
-        onClick={reset}
-        className="btn btn-outline fixed right-10 top-2/4"
-      >
-        Start new?
-      </button>
+      <div className="flex flex-col gap-3">
+        <button
+          onClick={goBack}
+          className="btn btn-outline md:fixed left-10 top-2/4"
+        >
+          Go back
+        </button>
+        <button
+          onClick={reset}
+          className="btn btn-outline md:fixed right-10 top-2/4"
+        >
+          Start new?
+        </button>
+      </div>
     </div>
   );
 };

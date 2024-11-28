@@ -30,7 +30,7 @@ const OptionsToCompare = () => {
                 <button
                   onClick={() => handleOptionClick(item.name)}
                   key={item.name}
-                  className="btn btn-outline"
+                  className="btn btn-outline btn-sm md:btn-md"
                 >
                   {item.name}
                 </button>
@@ -41,7 +41,7 @@ const OptionsToCompare = () => {
       </div>
       <button
         onClick={goBack}
-        className="btn btn-outline absolute left-10 top-2/4"
+        className="btn btn-outline md:fixed left-10 top-2/4"
       >
         Go back
       </button>
