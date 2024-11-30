@@ -60,13 +60,13 @@ const MissionResult = () => {
   }
 
   return (
-    <div className="w-fit max-w-5xl flex flex-col justify-center align-center">
+    <div className="w-full flex flex-col justify-center align-center gap-3">
       <div className={cn("w-full flex flex-col gap-4 text-xl")}>
-        <h2 className="text-3xl font-bold">Mission Summary</h2>
-        <div className="flex flex-col gap-2">
+        <h2 className="text-xl md:text-3xl font-bold">Mission Summary</h2>
+        <div className="flex flex-col gap-2 text-base ">
           <div>
-            <span className="font-semibold">Delta-V:</span>{" "}
-            <span className="text-orange-300">
+            <span className="text-base font-semibold">Delta-V:</span>{" "}
+            <span className="text-base text-orange-300">
               {result.deltaV.toFixed(2)} m/s
             </span>
           </div>
@@ -96,7 +96,7 @@ const MissionResult = () => {
           </div>
         </div>
       </div>
-      <div className="mt-28">
+      <div className="mt-10 md:mt-28">
         <h2 className="text-center text-3xl mb-10">Ranking</h2>
         {ranking.map((item, index) => (
           <div
@@ -115,7 +115,6 @@ const MissionResult = () => {
               label={{
                 value: "Propulsion System",
                 position: "insideBottom",
-                offset: -10,
               }}
             />
             <YAxis
@@ -125,24 +124,29 @@ const MissionResult = () => {
                 position: "insideLeft",
               }}
             />
-            <Tooltip formatter={(value) => `${value.toFixed(2)} days`} />
+            <Tooltip
+              cursor={{ fill: "transparent" }}
+              formatter={(value) => `${value.toFixed(2)} days`}
+            />
             <Bar dataKey="days" fill="#ffa500" />
           </BarChart>
         </ResponsiveContainer>
       </div>
       {/* Navigation Buttons */}
-      <button
-        onClick={goBack}
-        className="btn btn-outline fixed left-10 top-2/4"
-      >
-        Go back
-      </button>
-      <button
-        onClick={reset}
-        className="btn btn-outline fixed right-10 top-2/4"
-      >
-        Run another calculation
-      </button>
+      <div className="flex flex-col gap-3">
+        <button
+          onClick={goBack}
+          className="btn btn-outline md:fixed left-10 top-2/4"
+        >
+          Go back
+        </button>
+        <button
+          onClick={reset}
+          className="btn btn-outline md:fixed right-10 top-2/4"
+        >
+          Run another calculation
+        </button>
+      </div>
     </div>
   );
 };

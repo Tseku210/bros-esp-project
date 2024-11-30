@@ -17,9 +17,9 @@ const ThrusterOptions = () => {
   return (
     <div className="flex flex-col">
       <h2 className="text-center text-xl text-white/20 font-thin">
-        Select EPS to compare
+        Select Your Thruster
       </h2>
-      <div className="grid grid-cols-1 place-items-center w-fit">
+      <div className="grid grid-cols-1 place-items-center">
         {Array.from(types).map((type) => (
           <div key={type} tabIndex={0} className="collapse">
             <input type="checkbox" />
@@ -33,7 +33,7 @@ const ThrusterOptions = () => {
                 <button
                   onClick={() => handleOptionClick(item)}
                   key={item.name}
-                  className="btn btn-outline"
+                  className="btn btn-outline btn-sm md:btn-md"
                 >
                   {item.name}
                 </button>
@@ -44,7 +44,7 @@ const ThrusterOptions = () => {
       </div>
       <button
         onClick={goBack}
-        className="btn btn-outline absolute left-10 top-2/4"
+        className="btn btn-outline md:fixed left-10 top-2/4"
       >
         Go back
       </button>

@@ -12,7 +12,7 @@ function App() {
           alt="pusan logo"
           className="absolute top-10 right-10 h-20 md:h-28"
         />
-        <main className="my-28">
+        <main className="my-28 w-full max-w-2xl">
           <Project />
         </main>
         <ShootingStars />
