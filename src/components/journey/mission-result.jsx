@@ -141,7 +141,7 @@ const MissionResult = () => {
           Go back
         </button>
         <button
-          onClick={reset}
+          onClick={() => reset("mission")}
           className="btn btn-outline md:fixed right-10 top-2/4"
         >
           Run another calculation

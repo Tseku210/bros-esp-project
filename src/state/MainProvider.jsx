@@ -1,4 +1,5 @@
 import React, { createContext, useState } from "react";
+import SpacecraftOptions from "../components/journey/spacecraft-options";
 import StartingPoint from "../components/starting-point";
 
 export const MainContext = createContext(null);
@@ -11,13 +12,19 @@ const MainProvider = ({ children }) => {
   const [selectedShip, setSelectedShip] = useState(null);
   const [selectedPlanet, setSelectedPlanet] = useState(null);
   const [selectedThruster, setSelectedThruster] = useState(null);
-  const reset = () => {
+  const reset = (type) => {
     setSelectedOption(null);
     setSelectedOptionToCompare(null);
     setSelectedShip(null);
     setSelectedPlanet(null);
     setSelectedThruster(null);
-    setSteps([<StartingPoint />]);
+    setSteps(() => {
+      const newSteps = [<StartingPoint />];
+      if (type === "mission") {
+        newSteps.push(<SpacecraftOptions />);
+      }
+      return newSteps;
+    });
   };
   const addStep = (comp) => {
     setSteps((prev) => [...prev, comp]);

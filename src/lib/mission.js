@@ -5,7 +5,6 @@ const g0 = 9.80665; // Gravitational acceleration (m/s^2)
 export const calculateMissionParameters = (ship, planet, thruster) => {
   const propellantMass = ship.launchMass - ship.dryMass;
 
-  console.log(thruster.isp);
   const isp = parseArray(thruster.isp); // Average or single value from ISP array
   const thrust = parseArray(thruster.thrust); // Average or single value from thrust array
 
