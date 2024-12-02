@@ -17,7 +17,7 @@ const ThrusterOptions = () => {
   return (
     <div className="flex flex-col">
       <h2 className="text-center text-xl text-white/20 font-thin">
-        Select Your Thruster
+        Select Your Thruster For The Spacecraft
       </h2>
       <div className="grid grid-cols-1 place-items-center">
         {Array.from(types).map((type) => (

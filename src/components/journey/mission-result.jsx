@@ -51,10 +51,12 @@ const MissionResult = () => {
 
   if (result && result.error) {
     return (
-      <div>
+      <div className="flex flex-col gap-10">
         something went wrong. Refresh the page.
         {result.error}
-        <button onClick={goBack}>go back</button>
+        <button className="btn btn-outline" onClick={goBack}>
+          go back
+        </button>
       </div>
     );
   }
